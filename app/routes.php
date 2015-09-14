@@ -31,6 +31,12 @@ Route::post('/class/create', 'AdminController@createClass');
 
 Route::get('/classes', 'AdminController@classes');
 
+Route::get('/class/{id}', 'AdminController@viewClass');
+
+Route::post('/class/{id}/update', 'AdminController@updateClass');
+
+Route::post('/student/drop', 'AdminController@dropStudent');
+
 Route::get('/tester', function(){
 
 });

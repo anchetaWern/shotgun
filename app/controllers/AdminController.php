@@ -382,4 +382,53 @@ class AdminController extends BaseController {
 
 	}
 
+
+	public function viewClass($class_id){
+
+		$class = DB::table('classes')
+			->where('id', '=', $class_id)
+			->first();
+
+		$students = DB::table('students')
+			->join('student_classes', 'students.id', '=', 'student_classes.student_id')
+			->select('students.id AS student_id', 'student_classes.id AS student_class_id', 'last_name', 'first_name', 'middle_initial')
+			->where('student_classes.class_id', '=', $class_id)
+			->get();
+
+		$page_data = array(
+			'class' => $class,
+			'students' => $students
+		);
+
+		$this->layout->title = $class->name;
+		$this->layout->content = View::make('admin.class', $page_data);
+	}
+
+
+	public function updateClass($class_id){
+
+		$name = Input::get('name');
+		$details = Input::get('details');
+
+		$class = DB::table('classes')
+			->where('id', '=', $class_id)
+			->update(array(
+				'name' => $name,
+				'details' => $details
+			));
+
+		return Redirect::back()->with('message', array('type' => 'success', 'text' => 'Class Updated!'));
+	}
+
+
+
+	public function dropStudent(){
+
+		$id = Input::get('id');
+		$class_student = StudentClass::find($id);
+		$class_student->delete();
+
+		return array('type' => 'ok');
+	}
+
 }
