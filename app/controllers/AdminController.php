@@ -307,13 +307,16 @@ class AdminController extends BaseController {
 
 	public function createClass(){
 
+		$user_id = Auth::user()->id;
+
 		$name = Input::get('name');
 		$details = Input::get('details');
 
 		$students = Input::get('students');
 		$students = explode("\n", $students);
-		
+
 		$class_id = DB::table('classes')->insertGetId(array(
+			'user_id' => $user_id,
 			'name' => $name,
 			'details' => $details,
 			'class_code' => str_random(10)
