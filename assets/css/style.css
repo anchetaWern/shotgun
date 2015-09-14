@@ -1,8 +1,44 @@
-#login-fieldset {
-	margin-top: 100px;
-}
-
 #logo {
     width: 24px;
     display: inline-block;
+}
+
+body {
+	font-size: 16px;
+}
+
+#quiz-items-fieldset {
+	margin-top: 40px;
+}
+
+legend.sub {
+	font-size: 16px;
+}
+
+ul.no-bullet li {
+	list-style: none;
+}
+
+.quiz-item {
+    margin-bottom: 30px;
+    background-color: #F9F9F9;
+    padding: 50px;
+	border: 1px solid #EBEBEB;
+}
+
+.no-overflow {
+	overflow: auto;
+}
+
+.choices input {
+    width: 500px;
+    display: inline-block;
+}
+
+.margin-top {
+	margin-top: 20px;
+}
+
+.add-answer {
+    margin-left: 20px;
 }

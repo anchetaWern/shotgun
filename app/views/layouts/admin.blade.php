@@ -24,5 +24,9 @@
 	<div class="container">
 		@yield('content')
 	</div>
+	
+	<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+	<script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
+	<script src="{{ asset('assets/js/new_quiz.js') }}"></script>
 </body>
 </html>

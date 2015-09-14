@@ -1,0 +1,8 @@
+<ul class="choices no-bullet">
+{{#each choices}}
+	<li>
+		<input class="form-control choice" name="choice[{{../type}}][{{../question_index}}][]" type="text" placeholder="{{.}}">
+		<button type="button" class="btn btn-xs use-answer">use as answer</button>
+	</li>
+{{/each}}
+</ul>

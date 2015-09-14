@@ -1,7 +1,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-4">
-		<fieldset id="login-fieldset">
+		<fieldset>
 			<legend>Login</legend>		
 			@include('alert')
 			<form action="/login" method="POST">

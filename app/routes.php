@@ -15,3 +15,16 @@ Route::get('/login', 'HomeController@login');
 Route::post('/login', 'HomeController@doLogin');
 
 Route::get('/dashboard', 'AdminController@dashboard');
+
+Route::get('/quiz/new', 'AdminController@newQuiz');
+Route::post('/quiz/new', 'AdminController@createQuiz');
+
+Route::get('/quizzes', 'AdminController@quizzes');
+
+Route::get('/quiz/{id}', 'AdminController@quiz');
+
+Route::post('/quiz/{id}/update', 'AdminController@updateQuiz');
+
+Route::get('/tester', function(){
+
+});
