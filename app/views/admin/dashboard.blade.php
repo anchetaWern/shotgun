@@ -5,6 +5,9 @@
 
 		<ul>
 			<li>
+				<a href="/class/new">Create New Class</a>
+			</li>
+			<li>
 				<a href="/quiz/new">Create New Quiz</a>
 			</li>
 			<li>

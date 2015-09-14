@@ -25,6 +25,10 @@ Route::get('/quiz/{id}', 'AdminController@quiz');
 
 Route::post('/quiz/{id}/update', 'AdminController@updateQuiz');
 
+Route::get('/class/new', 'AdminController@newClass');
+
+Route::post('/class/create', 'AdminController@createClass');
+
 Route::get('/tester', function(){
 
 });
