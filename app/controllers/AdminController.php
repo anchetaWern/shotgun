@@ -364,4 +364,22 @@ class AdminController extends BaseController {
 
 	}
 
+
+	public function classes(){
+
+		$user_id = Auth::user()->id;
+
+		$classes = DB::table('classes')
+			->where('user_id', '=', $user_id)
+			->get();
+
+		$page_data = array(
+			'classes' => $classes
+		);
+
+		$this->layout->title = 'Classes';
+		$this->layout->content = View::make('admin.classes', $page_data);
+
+	}
+
 }

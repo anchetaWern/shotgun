@@ -29,6 +29,8 @@ Route::get('/class/new', 'AdminController@newClass');
 
 Route::post('/class/create', 'AdminController@createClass');
 
+Route::get('/classes', 'AdminController@classes');
+
 Route::get('/tester', function(){
 
 });

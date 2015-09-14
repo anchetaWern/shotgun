@@ -8,6 +8,9 @@
 				<a href="/class/new">Create New Class</a>
 			</li>
 			<li>
+				<a href="/classes">List Classes</a>
+			</li>
+			<li>
 				<a href="/quiz/new">Create New Quiz</a>
 			</li>
 			<li>
