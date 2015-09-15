@@ -40,6 +40,8 @@ Route::post('/class/{id}/update', 'AdminController@updateClass');
 
 Route::post('/student/drop', 'AdminController@dropStudent');
 
+Route::get('/schedules', 'AdminController@quizSchedules');
+
 Route::get('/tester', function(){
 
 });

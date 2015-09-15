@@ -511,4 +511,27 @@ class AdminController extends BaseController {
 
 	}
 
+
+	public function quizSchedules(){
+
+		$user_id = Auth::user()->id;
+
+		$current_datetime = Carbon::now()->toDateTimeString();
+
+		$quizzes = DB::table('quiz_schedules')
+			->join('quiz', 'quiz_schedules.quiz_id', '=', 'quiz.id')
+			->join('classes', 'quiz_schedules.class_id', '=', 'classes.id')
+			->select('quiz.title', 'classes.name', 'datetime_from', 'datetime_to', 'quiz_schedules.id')
+			->where('quiz_schedules.user_id', '=', $user_id)
+			->where('quiz_schedules.datetime_to', '>=', $current_datetime)
+			->get();
+
+		$page_data = array(
+			'quizzes' => $quizzes
+		);
+
+		$this->layout->title = 'Quiz Schedules';
+		$this->layout->content = View::make('admin.scheduled_quizzes', $page_data);
+	}
+
 }
