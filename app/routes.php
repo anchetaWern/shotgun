@@ -43,5 +43,5 @@ Route::post('/student/drop', 'AdminController@dropStudent');
 Route::get('/schedules', 'AdminController@quizSchedules');
 
 Route::get('/tester', function(){
-
+	
 });

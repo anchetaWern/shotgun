@@ -7,6 +7,7 @@
 				<tr>
 					<th>Title</th>
 					<th>Class</th>
+					<th>Code</th>
 					<th>Date</th>
 					<th>Time Start</th>
 					<th>Time End</th>
@@ -18,6 +19,7 @@
 				<tr>
 					<td>{{ $quiz->title }}</td>
 					<td>{{ $quiz->name }}</td>
+					<td>{{ $quiz->quiz_code }}</td>
 					<td>{{ Carbon::parse($quiz->datetime_from)->format('M d, Y') }}</td>
 					<td>{{ Carbon::parse($quiz->datetime_from)->format('h:i A') }}</td>
 					<td>{{ Carbon::parse($quiz->datetime_to)->format('h:i A') }}</td>
