@@ -10,7 +10,7 @@
 					  <input class="form-control" id="title" name="title" type="text" autofocus>
 					</div>
 					<div class="form-group">
-						<button id="save-quiz" class="btn btn-block btn-primary">Save</button>
+						<button class="btn btn-block btn-primary">Save</button>
 					</div>
 			</fieldset>
 		</div>

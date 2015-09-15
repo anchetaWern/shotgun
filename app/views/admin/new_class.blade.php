@@ -14,7 +14,7 @@
 					<textarea class="form-control" name="details" id="details" rows="3"></textarea>
 				</div>
 				<div class="form-group">
-					<button id="save-quiz" class="btn btn-block btn-primary">Save</button>
+					<button class="btn btn-block btn-primary">Save</button>
 				</div>
 			</fieldset>
 		</div>
