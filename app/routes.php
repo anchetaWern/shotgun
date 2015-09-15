@@ -21,6 +21,9 @@ Route::post('/quiz/new', 'AdminController@createQuiz');
 
 Route::get('/quizzes', 'AdminController@quizzes');
 
+Route::get('/quiz/schedule', 'AdminController@newQuizSchedule');
+Route::post('/quiz/schedule', 'AdminController@scheduleQuiz');
+
 Route::get('/quiz/{id}', 'AdminController@quiz');
 
 Route::post('/quiz/{id}/update', 'AdminController@updateQuiz');

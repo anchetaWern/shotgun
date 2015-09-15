@@ -431,4 +431,84 @@ class AdminController extends BaseController {
 		return array('type' => 'ok');
 	}
 
+
+	public function newQuizSchedule(){
+
+		$user_id = Auth::user()->id;
+		
+		$quizzes = Quiz::where('user_id', '=', $user_id)->lists('title', 'id');
+		$classes = DB::table('classes')
+			->where('user_id', '=', $user_id)
+			->lists('name', 'id');
+
+		$page_data = array(
+			'quizzes' => $quizzes,
+			'classes' => $classes
+		);
+
+		$this->layout->title = 'Schedule New Quiz';
+		$this->layout->content = View::make('admin.schedule_quiz', $page_data);
+
+	}
+
+
+	private function timestampToArray($timestamp){
+
+		$timestamp_parts = explode(' ', $timestamp);
+		
+		$date = $timestamp_parts[0];
+		$time = $timestamp_parts[1];
+
+		$date_parts = explode('/', $date);
+		$time_parts = explode(':', $time);
+
+		return array(
+			'month' => $date_parts[0],
+			'day' => $date_parts[1],
+			'year' => $date_parts[2],
+			'hour' => $time_parts[0],
+			'minute' => $time_parts[1],
+			'second' => '00'
+		);
+
+	}
+
+
+	public function scheduleQuiz(){
+
+		$user_id = Auth::user()->id;
+
+		$quiz = Input::get('quiz');
+		$class = Input::get('class');
+		$start_time = Input::get('start_time');
+		$end_time = Input::get('end_time');
+
+		$start_timestamp_array = $this->timestampToArray($start_time);
+		extract($start_timestamp_array);
+
+		$datetime_from = Carbon::create($year, $month, $day, $hour, $minute, $second)->toDateTimeString();
+
+		$end_timestamp_array = $this->timestampToArray($end_time);
+		extract($end_timestamp_array);
+
+		$datetime_to = Carbon::create($year, $month, $day, $hour, $minute, $second)->toDateTimeString();
+
+		$quiz_id = DB::table('quiz')
+			->where('title', '=', $quiz)->pluck('id');
+
+		$class_id = DB::table('classes')
+			->where('name', '=', $class)->pluck('id');
+
+		$quiz_schedule = new QuizSchedule;
+		$quiz_schedule->user_id = $user_id;
+		$quiz_schedule->quiz_id = $quiz_id;
+		$quiz_schedule->class_id = $class_id;
+		$quiz_schedule->datetime_from = $datetime_from;
+		$quiz_schedule->datetime_to = $datetime_to;
+		$quiz_schedule->save();
+
+		return Redirect::back()->with('message', array('type' => 'success', 'text' => 'Quiz Scheduled!'));
+
+	}
+
 }
