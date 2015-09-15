@@ -537,4 +537,73 @@ class AdminController extends BaseController {
 		$this->layout->content = View::make('admin.scheduled_quizzes', $page_data);
 	}
 
+
+	public function quizSchedule($schedule_id){
+
+		$user_id = Auth::user()->id;
+		
+		$quizzes = Quiz::where('user_id', '=', $user_id)->lists('title', 'id');
+		$classes = DB::table('classes')
+			->where('user_id', '=', $user_id)
+			->lists('name', 'id');	
+
+		$schedule = DB::table('quiz_schedules')
+			->join('quiz', 'quiz_schedules.quiz_id', '=', 'quiz.id')
+			->join('classes', 'quiz_schedules.class_id', '=', 'classes.id')
+			->select('quiz.title', 'classes.name', 'datetime_from', 'datetime_to', 'quiz_schedules.id')
+			->where('quiz_schedules.user_id', '=', $user_id)
+			->where('quiz_schedules.id', '=', $schedule_id)
+			->first();
+
+		$page_data = array(
+			'quizzes' => $quizzes,
+			'classes' => $classes,
+			'schedule' => $schedule
+		);
+
+		$this->layout->title = 'Update Quiz Schedule';
+		$this->layout->content = View::make('admin.update_quiz_schedule', $page_data);
+	}
+
+
+	public function updateQuizSchedule($schedule_id){
+
+		$user_id = Auth::user()->id;
+
+		$quiz = Input::get('quiz');
+		$class = Input::get('class');
+		$start_time = Input::get('start_time');
+		$end_time = Input::get('end_time');
+
+		$start_timestamp_array = $this->timestampToArray($start_time);
+		extract($start_timestamp_array);
+
+		$datetime_from = Carbon::create($year, $month, $day, $hour, $minute, $second)->toDateTimeString();
+
+		$end_timestamp_array = $this->timestampToArray($end_time);
+		extract($end_timestamp_array);
+
+		$datetime_to = Carbon::create($year, $month, $day, $hour, $minute, $second)->toDateTimeString();
+
+		$quiz_id = DB::table('quiz')
+			->where('title', '=', $quiz)->pluck('id');
+
+		$class_id = DB::table('classes')
+			->where('name', '=', $class)->pluck('id');
+
+		$quiz_code = str_random(10);
+
+		$quiz_schedule = QuizSchedule::find($schedule_id);
+		$quiz_schedule->user_id = $user_id;
+		$quiz_schedule->quiz_id = $quiz_id;
+		$quiz_schedule->class_id = $class_id;
+		$quiz_schedule->quiz_code = $quiz_code;
+		$quiz_schedule->datetime_from = $datetime_from;
+		$quiz_schedule->datetime_to = $datetime_to;
+		$quiz_schedule->save();
+
+		return Redirect::back()->with('message', array('type' => 'success', 'text' => 'Quiz Schedule Updated!'));
+
+	}
+
 }

@@ -24,6 +24,9 @@ Route::get('/quizzes', 'AdminController@quizzes');
 Route::get('/quiz/schedule', 'AdminController@newQuizSchedule');
 Route::post('/quiz/schedule', 'AdminController@scheduleQuiz');
 
+Route::get('/schedules/{id}', 'AdminController@quizSchedule');
+Route::post('/quiz/{id}/schedule/update', 'AdminController@updateQuizSchedule');
+
 Route::get('/quiz/{id}', 'AdminController@quiz');
 
 Route::post('/quiz/{id}/update', 'AdminController@updateQuiz');
@@ -43,5 +46,5 @@ Route::post('/student/drop', 'AdminController@dropStudent');
 Route::get('/schedules', 'AdminController@quizSchedules');
 
 Route::get('/tester', function(){
-	
+
 });
