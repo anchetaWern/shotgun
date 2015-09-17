@@ -14,6 +14,14 @@
 Route::get('/login', 'HomeController@login');
 Route::post('/login', 'HomeController@doLogin');
 
+Route::get('/start-quiz', 'HomeController@startQuiz');
+Route::post('/start-quiz', 'HomeController@doStartQuiz');
+
+Route::get('/take-quiz/{id}', 'HomeController@takeQuiz');
+Route::post('/submit-quiz', 'HomeController@submitQuiz');
+
+Route::get('/result', 'HomeController@quizResult');
+
 Route::get('/dashboard', 'AdminController@dashboard');
 
 Route::get('/quiz/new', 'AdminController@newQuiz');
