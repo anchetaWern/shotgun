@@ -606,4 +606,70 @@ class AdminController extends BaseController {
 
 	}
 
+
+	public function finishedQuizzes(){
+
+		$user_id = Auth::user()->id;
+
+		$current_datetime = Carbon::now()->toDateTimeString();
+
+		$quizzes = DB::table('quiz_schedules')
+			->join('quiz', 'quiz_schedules.quiz_id', '=', 'quiz.id')
+			->join('classes', 'quiz_schedules.class_id', '=', 'classes.id')
+			->select('quiz.title', 'classes.name', 'datetime_from', 'datetime_to', 'quiz_schedules.id')
+			->where('quiz_schedules.user_id', '=', $user_id)
+			->where('quiz_schedules.datetime_to', '<', $current_datetime)
+			->get();
+
+		$page_data = array(
+			'quizzes' => $quizzes
+		);
+
+		$this->layout->title = 'Finished Quizzes';
+		$this->layout->content = View::make('admin.finished_quizzes', $page_data);
+
+	}
+
+
+	public function scores($id){
+
+		//check if current user has created the quiz
+		$user_id = Auth::user()->id;
+
+		$quiz_schedule = QuizSchedule::find($id);
+
+		if($quiz_schedule->user_id != $user_id){
+			return Redirect::to('/finished')
+				->with('message', array('type' => 'danger', 'text' => 'You do not have the permission to view scores for this quiz.'));
+		}
+
+		$quiz = Quiz::find($quiz_schedule->quiz_id);
+
+		$quiz_item_count = DB::table('quiz_items')
+			->where('quiz_id', '=', $quiz_schedule->quiz_id)
+			->count();
+
+		$class = DB::table('classes')
+			->where('id', '=', $quiz_schedule->class_id)
+			->first();
+
+		$scores = DB::table('student_quizzes')
+			->join('students', 'student_quizzes.student_id', '=', 'students.id')
+			->select('students.id', 'last_name', 'first_name', 'middle_initial', 'score', 'started_at', 'submitted_at')
+			->where('quiz_schedule_id', '=', $id)
+			->get();
+
+		$page_data = array(
+			'class' => $class,
+			'quiz' => $quiz,
+			'quiz_item_count' => $quiz_item_count,
+			'quiz_schedule' => $quiz_schedule,
+			'scores' => $scores
+		);
+
+		$this->layout->title = 'Scores in ' . $quiz->title;
+		$this->layout->content = View::make('admin.scores', $page_data);
+
+	}
+
 }

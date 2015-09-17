@@ -22,6 +22,9 @@
 			<li>
 				<a href="/schedules">List Scheduled Quizzes</a>
 			</li>
+			<li>
+				<a href="/finished">List Finished Quizzes</a>
+			</li>
 		</ul>
 	</div>
 </div>

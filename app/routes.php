@@ -53,6 +53,10 @@ Route::post('/student/drop', 'AdminController@dropStudent');
 
 Route::get('/schedules', 'AdminController@quizSchedules');
 
+Route::get('/finished', 'AdminController@finishedQuizzes');
+
+Route::get('/scores/{id}', 'AdminController@scores');
+
 Route::get('/tester', function(){
 
 });
