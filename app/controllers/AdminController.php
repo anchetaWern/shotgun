@@ -672,4 +672,56 @@ class AdminController extends BaseController {
 
 	}
 
+
+	public function exportScores($id){
+
+		//check if current user has created the quiz
+		$user_id = Auth::user()->id;
+
+		$quiz_schedule = QuizSchedule::find($id);		
+
+		$quiz = Quiz::find($quiz_schedule->quiz_id);
+
+		$class = DB::table('classes')
+					->where('id', '=', $quiz_schedule->class_id)
+					->first();
+
+		if($quiz_schedule->user_id != $user_id){
+			return Redirect::to('/scores/' . $id)
+				->with('message', array('type' => 'danger', 'text' => 'You do not have the permission to export scores for this quiz.'));
+		}
+
+		$filename = "{$class->name}-{$quiz->title}-{$quiz_schedule->datetime_from}";
+
+		Excel::create($filename, function($excel) use ($id) {
+
+		    $excel->sheet('score-sheet', function($sheet) use ($id) {
+
+				$scores = DB::table('student_quizzes')
+						->join('students', 'student_quizzes.student_id', '=', 'students.id')
+						->select('students.id', 'last_name', 'first_name', 'middle_initial', 'score')
+						->where('quiz_schedule_id', '=', $id)
+						->get();
+
+				$data = array(
+					array('ID Number', 'Student Name', 'Score')
+				);
+
+				foreach($scores as $row){
+					$data[] = array(
+						'id' => $row->id,
+						'name' => "{$row->last_name}, {$row->first_name} {$row->middle_initial}",
+						'score' => $row->score
+					);
+				}
+		    	
+			
+		        $sheet->fromArray($data, null, 'A1', false, false);
+
+		    });
+
+		})->export('xls');
+
+	}
+
 }

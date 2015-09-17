@@ -47,3 +47,8 @@ ul.no-bullet li {
 .add-answer {
     margin-left: 20px;
 }
+
+#details {
+    overflow: auto;
+    margin-bottom: 30px;
+}

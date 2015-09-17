@@ -55,8 +55,11 @@ Route::get('/schedules', 'AdminController@quizSchedules');
 
 Route::get('/finished', 'AdminController@finishedQuizzes');
 
+Route::get('/scores/export/{id}', 'AdminController@exportScores');
+
 Route::get('/scores/{id}', 'AdminController@scores');
 
 Route::get('/tester', function(){
+
 
 });

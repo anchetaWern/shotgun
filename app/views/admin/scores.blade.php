@@ -2,11 +2,16 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3>{{ $quiz->title }}</h3>
-		<ul>
-			<li><strong>Class:</strong> {{ $class->name }}</li>
-			<li><strong>Date:</strong> {{ Carbon::parse($quiz_schedule->datetime_from)->format('M d, Y') }}</li>
-			<li><strong>Total Points:</strong> {{ $quiz_item_count }}</li>
-		</ul>
+		<div id="details">		
+			<ul>
+				<li><strong>Class:</strong> {{ $class->name }}</li>
+				<li><strong>Date:</strong> {{ Carbon::parse($quiz_schedule->datetime_from)->format('M d, Y') }}</li>
+				<li><strong>Total Points:</strong> {{ $quiz_item_count }}</li>
+			</ul>
+			<form action="/scores/export/{{ $quiz_schedule->id }}">
+				<button class="btn btn-primary pull-right">Export to Spreadsheet</button>
+			</form>
+		</div>
 		@if($scores)
 		<table class="table">
 			<thead>
