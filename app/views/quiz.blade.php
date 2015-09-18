@@ -8,7 +8,7 @@
 					@foreach($quiz_items as $item_id => $item)
 					<ul class="quiz-item no-bullet" data-id="{{ $item_id }}">
 						<li>
-							<p>{{ $item['question'] }}</p>
+							<p>{{{ $item['question'] }}}</p>
 							<input type="hidden" name="item_id[]" value="{{ $item_id }}">
 						</li>
 						@if(!empty($item['choices']))	
@@ -17,7 +17,7 @@
 								<li>
 									<div class="radio">
 									  <label>
-									    <input type="radio" class="radio-input" name="{{ $item_id }}" value="{{ $choice }}"> {{ $choice }}
+									    <input type="radio" class="radio-input" name="{{ $item_id }}" value="{{ $choice }}"> {{{ $choice }}}
 									  </label>
 									</div>
 								</li>
