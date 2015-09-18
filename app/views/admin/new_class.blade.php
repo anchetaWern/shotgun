@@ -21,8 +21,8 @@
 
 		<div class="col-md-8">
 			<div class="form-group">
-				<label class="control-label" for="students">Students</label>
-				<textarea class="form-control" name="students" id="students" rows="20" placeholder="(format: StudentIDLastName, FirstName MiddleInitial.)"></textarea>
+				<label class="control-label" for="students">Students (format: StudentIDLastName, FirstName MiddleInitial. Gender)</label>
+				<textarea class="form-control" name="students" id="students" rows="20" placeholder="e.g. 1111111 Asakura, Yoh B. M"></textarea>
 			</div>
 		</div>
 	</form>

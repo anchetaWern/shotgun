@@ -314,13 +314,14 @@ class AdminController extends BaseController {
 
 		$students = Input::get('students');
 		$students = explode("\n", $students);
-
+		
 		$class_id = DB::table('classes')->insertGetId(array(
 			'user_id' => $user_id,
 			'name' => $name,
 			'details' => $details,
 			'class_code' => str_random(10)
 		));
+		
 		
 		foreach($students as $row){
 			if(!empty($row)){
@@ -337,6 +338,9 @@ class AdminController extends BaseController {
 				$middle_initial = substr($student_name, -2);
 				$first_name = trim(substr($student_name, $delimiter_position + 1, -3)); 
 
+				$gender = trim($exploded_row[2]);
+
+
 				$student = Student::find($student_id);
 				if(!$student){
 					$student = new Student;
@@ -344,6 +348,7 @@ class AdminController extends BaseController {
 					$student->last_name = $last_name;
 					$student->first_name = $first_name;
 					$student->middle_initial = $middle_initial;
+					$student->gender = $gender;
 					$student->save();
 				}
 
@@ -356,6 +361,7 @@ class AdminController extends BaseController {
 					$student_class->class_id = $class_id;
 					$student_class->save();
 				}
+				
 				
 			}
 		}
@@ -391,8 +397,10 @@ class AdminController extends BaseController {
 
 		$students = DB::table('students')
 			->join('student_classes', 'students.id', '=', 'student_classes.student_id')
-			->select('students.id AS student_id', 'student_classes.id AS student_class_id', 'last_name', 'first_name', 'middle_initial')
+			->select('students.id AS student_id', 'student_classes.id AS student_class_id', 'last_name', 'first_name', 'middle_initial', 'gender')
 			->where('student_classes.class_id', '=', $class_id)
+			->orderBy('gender', 'DESC')
+			->orderBy('last_name', 'ASC')
 			->get();
 
 		$page_data = array(
@@ -663,6 +671,7 @@ class AdminController extends BaseController {
 			->leftJoin('student_quizzes', 'student_classes.student_id', '=', 'student_quizzes.student_id')
 			->select('students.id', 'last_name', 'first_name', 'middle_initial', 'started_at', 'submitted_at')
 			->where('student_classes.class_id', '=', $quiz_schedule->class_id)
+			->orderBy('gender', 'DESC')
 			->orderBy('last_name', 'ASC')
 			->get();
 
@@ -739,6 +748,7 @@ class AdminController extends BaseController {
 					->leftJoin('student_quizzes', 'student_classes.student_id', '=', 'student_quizzes.student_id')
 					->select('students.id', 'last_name', 'first_name', 'middle_initial', 'started_at', 'submitted_at')
 					->where('student_classes.class_id', '=', $quiz_schedule->class_id)
+					->orderBy('gender', 'DESC')
 					->orderBy('last_name', 'ASC')
 					->get();
 

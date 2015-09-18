@@ -25,6 +25,7 @@
 					<tr>
 						<th>ID Number</th>
 						<th>Student</th>
+						<th>Gender</th>
 						<th>Drop</th>
 					</tr>
 				</thead>
@@ -33,6 +34,7 @@
 					<tr>
 						<td>{{ $student->student_id }}</td>
 						<td>{{ $student->last_name }}, {{ $student->first_name }} {{ $student->middle_initial }}</td>
+						<td>{{ $student->gender }}</td>
 						<td><button type="button" class="drop-student btn btn-danger" data-id="{{ $student->student_class_id }}" data-name="{{ $student->last_name }}, {{ $student->first_name }}">drop</button></td>
 					</tr>
 					@endforeach
