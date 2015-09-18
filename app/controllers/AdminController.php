@@ -665,12 +665,10 @@ class AdminController extends BaseController {
 			->where('quiz_schedule_id', '=', $id)
 			->lists('score', 'student_id');
 
-		
-		$students = DB::table('student_classes')
-			->leftJoin('students', 'student_classes.student_id', '=', 'students.id')
-			->leftJoin('student_quizzes', 'student_classes.student_id', '=', 'student_quizzes.student_id')
-			->select('students.id', 'last_name', 'first_name', 'middle_initial', 'started_at', 'submitted_at')
-			->where('student_classes.class_id', '=', $quiz_schedule->class_id)
+		$students = DB::table('students')
+			->join('student_classes', 'students.id', '=', 'student_classes.student_id')
+			->select('students.id', 'last_name', 'first_name', 'middle_initial')
+			->where('student_classes.class_id', '=', $class->id)
 			->orderBy('gender', 'DESC')
 			->orderBy('last_name', 'ASC')
 			->get();
@@ -680,13 +678,9 @@ class AdminController extends BaseController {
 		foreach($students as $student){
 
 			$score = '';
-			$started_at = '';
-			$submitted_at = '';
-
+		
 			if(isset($scores[$student->id])){
 				$score = $scores[$student->id];
-				$started_at = $student->started_at;
-				$submitted_at = $student->submitted_at;
 			}
 
 			$student_scores[] = array(
@@ -694,13 +688,12 @@ class AdminController extends BaseController {
 				'last_name' => $student->last_name,
 				'first_name' => $student->first_name,
 				'middle_initial' => $student->middle_initial,
-				'started_at' => $started_at,
-				'submitted_at' => $submitted_at,
 				'score' => $score
 			);
 
 		}
 
+		
 		$page_data = array(
 			'class' => $class,
 			'quiz' => $quiz,
@@ -743,10 +736,9 @@ class AdminController extends BaseController {
 					->where('quiz_schedule_id', '=', $id)
 					->lists('score', 'student_id');
 
-				$students = DB::table('student_classes')
-					->leftJoin('students', 'student_classes.student_id', '=', 'students.id')
-					->leftJoin('student_quizzes', 'student_classes.student_id', '=', 'student_quizzes.student_id')
-					->select('students.id', 'last_name', 'first_name', 'middle_initial', 'started_at', 'submitted_at')
+				$students = DB::table('students')
+					->join('student_classes', 'students.id', '=', 'student_classes.student_id')
+					->select('students.id', 'last_name', 'first_name', 'middle_initial')
 					->where('student_classes.class_id', '=', $quiz_schedule->class_id)
 					->orderBy('gender', 'DESC')
 					->orderBy('last_name', 'ASC')

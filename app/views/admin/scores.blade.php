@@ -18,8 +18,6 @@
 				<tr>
 					<th>ID Number</th>
 					<th>Student</th>
-					<th>Time Started</th>
-					<th>Time Submitted</th>
 					<th>Score</th>
 				</tr>
 			</thead>
@@ -29,16 +27,8 @@
 					<td>{{ $row['id'] }}</td>
 					<td>{{ $row['last_name'] }}, {{ $row['first_name'] }} {{ $row['middle_initial'] }}</td>
 					<td>
-					@if($row['started_at'])
-					{{ Carbon::parse($row['started_at'])->format('h:i A') }}
-					@endif
+					{{ $row['score'] }}
 					</td>
-					<td>
-					@if($row['submitted_at'])
-					{{ Carbon::parse($row['submitted_at'])->format('h:i A') }}
-					@endif
-					</td>
-					<td>{{ $row['score'] }}</td>
 				</tr>
 				@endforeach
 			</tbody>
