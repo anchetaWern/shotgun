@@ -654,17 +654,50 @@ class AdminController extends BaseController {
 			->first();
 
 		$scores = DB::table('student_quizzes')
-			->join('students', 'student_quizzes.student_id', '=', 'students.id')
-			->select('students.id', 'last_name', 'first_name', 'middle_initial', 'score', 'started_at', 'submitted_at')
 			->where('quiz_schedule_id', '=', $id)
+			->lists('score', 'student_id');
+
+		
+		$students = DB::table('student_classes')
+			->leftJoin('students', 'student_classes.student_id', '=', 'students.id')
+			->leftJoin('student_quizzes', 'student_classes.student_id', '=', 'student_quizzes.student_id')
+			->select('students.id', 'last_name', 'first_name', 'middle_initial', 'started_at', 'submitted_at')
+			->where('student_classes.class_id', '=', $quiz_schedule->class_id)
+			->orderBy('last_name', 'ASC')
 			->get();
+
+		$student_scores = array();
+
+		foreach($students as $student){
+
+			$score = '';
+			$started_at = '';
+			$submitted_at = '';
+
+			if(isset($scores[$student->id])){
+				$score = $scores[$student->id];
+				$started_at = $student->started_at;
+				$submitted_at = $student->submitted_at;
+			}
+
+			$student_scores[] = array(
+				'id' => $student->id,
+				'last_name' => $student->last_name,
+				'first_name' => $student->first_name,
+				'middle_initial' => $student->middle_initial,
+				'started_at' => $started_at,
+				'submitted_at' => $submitted_at,
+				'score' => $score
+			);
+
+		}
 
 		$page_data = array(
 			'class' => $class,
 			'quiz' => $quiz,
 			'quiz_item_count' => $quiz_item_count,
 			'quiz_schedule' => $quiz_schedule,
-			'scores' => $scores
+			'student_scores' => $student_scores
 		);
 
 		$this->layout->title = 'Scores in ' . $quiz->title;
@@ -693,30 +726,44 @@ class AdminController extends BaseController {
 
 		$filename = "{$class->name}-{$quiz->title}-{$quiz_schedule->datetime_from}";
 
-		Excel::create($filename, function($excel) use ($id) {
+		Excel::create($filename, function($excel) use ($id, $quiz_schedule) {
 
-		    $excel->sheet('score-sheet', function($sheet) use ($id) {
-
+		    $excel->sheet('score-sheet', function($sheet) use ($id, $quiz_schedule) {
+		    
 				$scores = DB::table('student_quizzes')
-						->join('students', 'student_quizzes.student_id', '=', 'students.id')
-						->select('students.id', 'last_name', 'first_name', 'middle_initial', 'score')
-						->where('quiz_schedule_id', '=', $id)
-						->get();
+					->where('quiz_schedule_id', '=', $id)
+					->lists('score', 'student_id');
 
-				$data = array(
+				$students = DB::table('student_classes')
+					->leftJoin('students', 'student_classes.student_id', '=', 'students.id')
+					->leftJoin('student_quizzes', 'student_classes.student_id', '=', 'student_quizzes.student_id')
+					->select('students.id', 'last_name', 'first_name', 'middle_initial', 'started_at', 'submitted_at')
+					->where('student_classes.class_id', '=', $quiz_schedule->class_id)
+					->orderBy('last_name', 'ASC')
+					->get();
+
+				$student_scores = array(
 					array('ID Number', 'Student Name', 'Score')
 				);
 
-				foreach($scores as $row){
-					$data[] = array(
-						'id' => $row->id,
-						'name' => "{$row->last_name}, {$row->first_name} {$row->middle_initial}",
-						'score' => $row->score
+				foreach($students as $student){
+
+					$score = '';
+
+					if(isset($scores[$student->id])){
+						$score = $scores[$student->id];
+					}
+
+					$student_scores[] = array(
+						'id' => $student->id,
+						'name' => "{$student->last_name}, {$student->first_name} {$student->middle_initial}",
+						'score' => $score
 					);
+
 				}
-		    	
-			
-		        $sheet->fromArray($data, null, 'A1', false, false);
+
+
+		        $sheet->fromArray($student_scores, null, 'A1', false, false);
 
 		    });
 

@@ -12,7 +12,7 @@
 				<button class="btn btn-primary pull-right">Export to Spreadsheet</button>
 			</form>
 		</div>
-		@if($scores)
+		@if($student_scores)
 		<table class="table">
 			<thead>
 				<tr>
@@ -24,13 +24,21 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($scores as $row)
+				@foreach($student_scores as $row)
 				<tr>
-					<td>{{ $row->id }}</td>
-					<td>{{ $row->last_name }}, {{ $row->first_name }} {{ $row->middle_initial }}</td>
-					<td>{{ Carbon::parse($row->started_at)->format('h:i A') }}</td>
-					<td>{{ Carbon::parse($row->submitted_at)->format('h:i A') }}</td>
-					<td>{{ $row->score }}</td>
+					<td>{{ $row['id'] }}</td>
+					<td>{{ $row['last_name'] }}, {{ $row['first_name'] }} {{ $row['middle_initial'] }}</td>
+					<td>
+					@if($row['started_at'])
+					{{ Carbon::parse($row['started_at'])->format('h:i A') }}
+					@endif
+					</td>
+					<td>
+					@if($row['submitted_at'])
+					{{ Carbon::parse($row['submitted_at'])->format('h:i A') }}
+					@endif
+					</td>
+					<td>{{ $row['score'] }}</td>
 				</tr>
 				@endforeach
 			</tbody>
