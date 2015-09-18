@@ -599,13 +599,10 @@ class AdminController extends BaseController {
 		$class_id = DB::table('classes')
 			->where('name', '=', $class)->pluck('id');
 
-		$quiz_code = str_random(10);
-
 		$quiz_schedule = QuizSchedule::find($schedule_id);
 		$quiz_schedule->user_id = $user_id;
 		$quiz_schedule->quiz_id = $quiz_id;
 		$quiz_schedule->class_id = $class_id;
-		$quiz_schedule->quiz_code = $quiz_code;
 		$quiz_schedule->datetime_from = $datetime_from;
 		$quiz_schedule->datetime_to = $datetime_to;
 		$quiz_schedule->save();
