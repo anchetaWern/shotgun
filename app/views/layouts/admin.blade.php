@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>{{ Config::get('app.title') }}</title>
+	<title>{{ $title }}</title>
 	<link rel="stylesheet" href="{{ asset('assets/lib/bootstrap/css/bootstrap.min.css') }}">
 
 	@if(!empty($bootstrapdialog))
@@ -17,7 +17,7 @@
 		  <div class="container-fluid">
 		    <div class="navbar-header">
 		      
-		      <a class="navbar-brand" href="/">
+		      <a class="navbar-brand" href="/dashboard">
 		      	<img src="{{ asset('assets/img/logo.png') }}" id="logo" alt="logo">
 		      	Shotgun
 		      </a>

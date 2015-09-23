@@ -6,6 +6,7 @@ class HomeController extends BaseController {
 
 
 	public function login(){
+		$this->layout->title = 'Login';
 		$this->layout->content = View::make('login');
 	}
 

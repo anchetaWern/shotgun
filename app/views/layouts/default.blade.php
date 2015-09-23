@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>{{ Config::get('app.title') }}</title>
+	<title>{{ $title }}</title>
 	<link rel="stylesheet" href="{{ asset('assets/lib/bootstrap/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>

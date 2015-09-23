@@ -6,6 +6,7 @@ class AdminController extends BaseController {
 
 
 	public function dashboard(){
+		$this->layout->title = 'Dashboard';
 		$this->layout->content = View::make('admin.dashboard');
 	}
 
@@ -14,6 +15,8 @@ class AdminController extends BaseController {
 		$page_data = array(
 			'type' => 'new'
 		);
+		
+		$this->layout->title = 'Create New Quiz';
 		$this->layout->handlebars = true;
 		$this->layout->quizcreator = true;
 		$this->layout->content = View::make('admin.new_quiz', $page_data);
