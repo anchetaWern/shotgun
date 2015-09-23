@@ -10,6 +10,10 @@
 					  <input class="form-control" id="title" name="title" type="text" value="{{ $quiz->title }}" autofocus>
 					</div>
 					<div class="form-group">
+					  <label class="control-label" for="details">Details</label>
+					  <textarea class="form-control" name="details" id="details" rows="3" value="{{ $quiz->details }}">{{ $quiz->details }}</textarea>
+					</div>
+					<div class="form-group">
 						<button class="btn btn-block btn-primary">Save</button>
 					</div>
 			</fieldset>

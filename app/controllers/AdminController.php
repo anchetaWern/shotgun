@@ -23,6 +23,8 @@ class AdminController extends BaseController {
 		$user_id = Auth::user()->id;
 
 		$title = Input::get('title');
+		$details = Input::get('details');
+
 		$questions = Input::get('question');
 		$answers = Input::get('answer');
 		$choices = Input::get('choice');
@@ -30,6 +32,7 @@ class AdminController extends BaseController {
 		$quiz = new Quiz;
 		$quiz->user_id = $user_id;
 		$quiz->title = $title;
+		$quiz->details = $details;
 		$quiz->save();
 
 		$quiz_id = $quiz->id;
@@ -138,6 +141,7 @@ class AdminController extends BaseController {
 
 		$quiz = Quiz::find($quiz_id);
 		$quiz->title = Input::get('title');
+		$quiz->details = Input::get('details');
 		$quiz->save();
 
 		$questions = Input::get('question');

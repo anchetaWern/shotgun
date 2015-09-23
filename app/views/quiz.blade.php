@@ -40,5 +40,10 @@
 			</fieldset>
 		</form>
 	</div>
+	<div class="col-md-4">
+		<div class="alert alert-info">
+			{{ nl2br($quiz->details) }}
+		</div>
+	</div>
 </div>
 @stop

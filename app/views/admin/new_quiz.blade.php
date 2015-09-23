@@ -10,6 +10,10 @@
 					  <input class="form-control" id="title" name="title" type="text" autofocus>
 					</div>
 					<div class="form-group">
+						<label class="control-label" for="details">Details</label>
+						<textarea class="form-control" name="details" id="details" rows="3"></textarea>
+					</div>
+					<div class="form-group">
 						<button class="btn btn-block btn-primary">Save</button>
 					</div>
 			</fieldset>
