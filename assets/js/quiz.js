@@ -1,3 +1,7 @@
+$(window).blur(function(){
+	$('#quiz-form').submit();
+});
+
 $('.radio-input').click(function(){
 	var self = $(this);
 	var answer = self.val();

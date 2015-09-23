@@ -4,7 +4,11 @@
 	<meta charset="UTF-8">
 	<title>{{ Config::get('app.title') }}</title>
 	<link rel="stylesheet" href="{{ asset('assets/lib/bootstrap/css/bootstrap.min.css') }}">
+
+	@if(!empty($bootstrapdialog))
 	<link rel="stylesheet" href="{{ asset('assets/lib/bootstrap-dialog/bootstrap-dialog.min.css') }}">
+	@endif
+
 	<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 <body>
@@ -27,17 +31,22 @@
 	</div>
 	
 	<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-	
 	<script src="{{ asset('assets/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-
-	<script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
 	
+	@if(!empty($handlebars))
+	<script src="{{ asset('assets/js/handlebars.min.js') }}"></script>
+	@endif
 
+	@if(!empty($bootstrapdialog))
 	<script src="{{ asset('assets/lib/bootstrap-dialog/bootstrap-dialog.min.js') }}"></script>
+	@endif
 
+	@if(!empty($quizcreator))
+	<script src="{{ asset('assets/js/quiz-creator.js') }}"></script>
+	@endif
 
-	<script src="{{ asset('assets/js/new_quiz.js') }}"></script>
-
+	@if(!empty($viewclass))
 	<script src="{{ asset('assets/js/class.js') }}"></script>
+	@endif
 </body>
 </html>

@@ -131,6 +131,7 @@ class HomeController extends BaseController {
 		}
 
 		$this->layout->title = $page_title;
+		$this->layout->quiz = true;
 		$this->layout->content = $page_content;
 	}
 

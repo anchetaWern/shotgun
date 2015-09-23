@@ -1,5 +1,3 @@
-var z;
-
 (function(){
 
 	var quizitem_template;

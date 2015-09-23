@@ -25,9 +25,9 @@
 		@yield('content')
 	</div>
 	<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-
-	<script src="{{ asset('assets/js/main.js') }}"></script>
-
+	
+	@if(!empty($quiz))
 	<script src="{{ asset('assets/js/quiz.js') }}"></script>
+	@endif
 </body>
 </html>

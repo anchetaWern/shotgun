@@ -14,6 +14,8 @@ class AdminController extends BaseController {
 		$page_data = array(
 			'type' => 'new'
 		);
+		$this->layout->handlebars = true;
+		$this->layout->quizcreator = true;
 		$this->layout->content = View::make('admin.new_quiz', $page_data);
 	}
 
@@ -131,6 +133,8 @@ class AdminController extends BaseController {
 		);
 
 		$this->layout->title = $quiz->title;
+		$this->layout->handlebars = true;
+		$this->layout->quizcreator = true;
 		$this->layout->content = View::make('admin.quiz', $page_data);
 		
 
@@ -413,6 +417,8 @@ class AdminController extends BaseController {
 		);
 
 		$this->layout->title = $class->name;
+		$this->layout->bootstrapdialog = true;
+		$this->layout->viewclass = true;
 		$this->layout->content = View::make('admin.class', $page_data);
 	}
 
