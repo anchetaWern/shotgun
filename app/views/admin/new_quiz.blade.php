@@ -31,13 +31,13 @@
 					<ul class="quiz-item no-bullet" data-id="0">
 						<li>
 							<label class="control-label">Question</label>
-							<input class="form-control question" name="question[{{ $type }}][]" type="text">
+							<textarea class="form-control question" name="question[{{ $type }}][]" rows="3"></textarea>
 						</li>
 						<li>
 							<label class="control-label">Answer</label>
 							<button type="button" class="add-answer btn btn-warning btn-xs" data-type="{{ $type }}">Add Another Answer</button>
 							<div class="answers-container">
-								<input class="form-control answer" name="answer[{{ $type }}][0][]" type="text" placeholder="Answer 1">
+								<textarea class="form-control answer" name="answer[{{ $type }}][0][]" rows="1"  placeholder="Answer 1"></textarea>
 							</div>
 						</li>
 						<li class="margin-top">

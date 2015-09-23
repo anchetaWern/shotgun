@@ -33,7 +33,7 @@
 					<ul class="quiz-item no-bullet" data-id="{{ $item_id }}">
 						<li>
 							<label class="control-label">Question</label>
-							<input type="text" class="form-control question" name="question[{{ $type }}][]" value="{{ $item['question'] }}">
+							<textarea class="form-control question" name="question[{{ $type }}][]" rows="3" value="{{ $item['question'] }}">{{ $item['question'] }}</textarea>
 						</li>
 						<li>
 							<label class="control-label">Answer</label>
@@ -41,7 +41,7 @@
 							<div class="answers-container" data-id="{{ $item_id }}">
 							@if(!empty($item['answers']))
 								@foreach($item['answers'] as $answer)
-									<input type="text" class="form-control answer" name="answer[{{ $type }}][{{ $item_id }}][]" value="{{ $answer }}" placeholder="Answer 1">
+									<textarea class="form-control answer" name="answer[{{ $type }}][{{ $item_id }}][]" rows="1"  placeholder="Answer 1" value="{{ $answer }}">{{ $answer }}</textarea>
 								@endforeach
 							@endif
 							</div>
@@ -54,7 +54,7 @@
 								<ul class="choices no-bullet">
 								@foreach($item['choices'] as $choice)
 									<li>
-										<input class="form-control choice" name="choice[{{ $type }}][{{ $item_id }}][]" type="text" value="{{ $choice }}">
+										<textarea class="form-control choice" name="choice[{{ $type }}][{{ $item_id }}][]" rows="3" value="{{ $choice }}">{{ $choice }}</textarea>
 										<button type="button" class="btn btn-xs use-answer">use as answer</button>
 									</li>
 								@endforeach
