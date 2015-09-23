@@ -1,7 +1,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-8">
-		<form action="/submit-quiz" method="POST">
+		<form id="quiz-form" action="/submit-quiz" method="POST">
 			<fieldset>
 				<legend>{{ $quiz->title }}</legend>
 				<div id="quiz-items">
