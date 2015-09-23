@@ -52,3 +52,9 @@ ul.no-bullet li {
     overflow: auto;
     margin-bottom: 30px;
 }
+
+#add-item {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
