@@ -58,3 +58,17 @@ ul.no-bullet li {
     bottom: 20px;
     right: 20px;
 }
+
+#time-container {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+}
+
+#time {
+    font-size: 50px;
+}
+
+#quiz-form {
+    display: none;
+}

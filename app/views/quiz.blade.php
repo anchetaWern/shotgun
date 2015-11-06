@@ -1,6 +1,10 @@
 @section('content')
 <div class="row">
 	<div class="col-md-8">
+		<noscript>
+			You cannot take a quiz without JavaScript. <br>
+			Enable JavaScript on this browser
+		</noscript>
 		<form id="quiz-form" action="/submit-quiz" method="POST">
 			<fieldset>
 				<legend>{{ $quiz->title }}</legend>
@@ -17,7 +21,7 @@
 								<li>
 									<div class="radio">
 									  <label>
-									    <input type="radio" class="radio-input" name="{{ $item_id }}" value="{{ $choice }}"> {{{ $choice }}}
+									    <input type="radio" class="radio-input" name="{{ $item_id }}" value="{{ $choice }}"> <pre>{{{ $choice }}}</pre>
 									  </label>
 									</div>
 								</li>
@@ -27,7 +31,7 @@
 						@else
 						<li>
 							<label class="control-label">Answer</label>
-							<input type="text" class="form-control" name="answer[]">
+							<input type="text" class="form-control" name="answer[]" autocomplete="off">
 						</li>
 						@endif
 					</ul>
@@ -40,10 +44,9 @@
 			</fieldset>
 		</form>
 	</div>
-	<div class="col-md-4">
-		<div class="alert alert-info">
-			{{ nl2br($quiz->details) }}
-		</div>
+	<div class="col-md-4" id="time-container">
+		Seconds remaining:
+		<div id="time"></div>
 	</div>
 </div>
 @stop

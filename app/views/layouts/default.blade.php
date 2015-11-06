@@ -26,6 +26,10 @@
 	</div>
 	<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 	
+	@if(!empty($take_quiz))
+	<script src="{{ asset('assets/js/take-quiz.js') }}"></script>
+	@endif
+
 	@if(!empty($quiz))
 	<script src="{{ asset('assets/js/quiz.js') }}"></script>
 	@endif

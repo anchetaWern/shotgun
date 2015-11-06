@@ -14,6 +14,12 @@
 Route::get('/login', 'HomeController@login');
 Route::post('/login', 'HomeController@doLogin');
 
+Route::post('/meh', function(){
+
+	return 'I commend your effort young padawan.';
+
+});
+
 Route::get('/start-quiz', 'HomeController@startQuiz');
 Route::post('/start-quiz', 'HomeController@doStartQuiz');
 

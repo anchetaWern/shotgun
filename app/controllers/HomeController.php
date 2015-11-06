@@ -28,6 +28,7 @@ class HomeController extends BaseController {
 	public function startQuiz(){
 
 		$this->layout->title = 'Take Quiz';
+		$this->layout->take_quiz = true;
 		$this->layout->content = View::make('take_quiz');
 	}
 
@@ -91,7 +92,9 @@ class HomeController extends BaseController {
 					Session::put('quiz_id', $quiz_id);
 					Session::put('quiz_title', $quiz->title);
 
-					$items = QuizItem::where('quiz_id', '=', $quiz_id)->get();
+					$items = QuizItem::where('quiz_id', '=', $quiz_id)
+						->orderByRaw("RAND()")
+						->get();
 
 					$item_ids = DB::table('quiz_items')->where('quiz_id', '=', $quiz_id)->lists('id');
 
