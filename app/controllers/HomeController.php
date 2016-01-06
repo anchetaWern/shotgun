@@ -114,9 +114,12 @@ class HomeController extends BaseController {
 						$quiz_items[$qic->quiz_item_id]['choices'][] = $qic->choice;
 					}
 
+					$seconds = $quiz->minutes * 60 + 1;
+
 					$page_data = array(
 						'quiz' => $quiz,
-						'quiz_items' => $quiz_items
+						'quiz_items' => $quiz_items,
+						'seconds' => $seconds
 					);
 
 					//create student quiz

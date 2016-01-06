@@ -44,9 +44,16 @@
 			</fieldset>
 		</form>
 	</div>
-	<div class="col-md-4" id="time-container">
+	
+	<div class="col-md-2" id="time-container">
 		Seconds remaining:
-		<div id="time"></div>
+		<div id="time">{{ $seconds }}</div>
 	</div>
+
+	<div class="col-md-2" id="warning-container">
+		Warnings:
+		<div id="warning">0</div>
+	</div>
+		
 </div>
 @stop

@@ -59,16 +59,26 @@ ul.no-bullet li {
     right: 20px;
 }
 
+#warning-container {
+    position: fixed;
+    top: 90px;
+    right: 160px;
+}
+
 #time-container {
     position: fixed;
     top: 90px;
     right: 20px;
 }
 
-#time {
+#time, #warning {
     font-size: 50px;
 }
 
 #quiz-form {
+    display: none;
+}
+
+.hidden {
     display: none;
 }

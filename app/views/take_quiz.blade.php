@@ -6,15 +6,17 @@
 			Enable JavaScript on this browser
 		</noscript>
 		<form action="/meh" id="quiz-form" method="POST">
-			<div class="alert alert-info">
+			<div class="alert alert-info" id="note">
 			Note: <br>
 			- Questions are ordered randomly <br>
-			- You have 13 minutes (780 seconds) to answer all the questions.<br>
+			- Pressing enter would submit the quiz <br>
 			- When the time limit reaches 0, the quiz is automatically submitted <br>
-			- When you attempt to access any other window, browser tab, browser extension/plugin, developer tools or application, the quiz is automatically submitted 
+			- The quiz is automatically submitted once the warning count becomes 3. <br> 
+			Warning is initially zero but it's incremented every time you alt+tab or access any other window or tab in the browser.
+				<button type="button" id="agree" class="btn btn-block btn-warning">Yes sir!</button>
 			</div>
 
-			<fieldset>
+			<fieldset id="take-quiz" class="hidden">
 				<legend>Take Quiz</legend>		
 				@include('alert')
 				<div class="form-group">
