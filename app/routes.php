@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/', 'HomeController@index');
+
 Route::get('/login', 'HomeController@login');
 Route::post('/login', 'HomeController@doLogin');
 
@@ -64,8 +66,3 @@ Route::get('/finished', 'AdminController@finishedQuizzes');
 Route::get('/scores/export/{id}', 'AdminController@exportScores');
 
 Route::get('/scores/{id}', 'AdminController@scores');
-
-Route::get('/tester', function(){
-
-
-});

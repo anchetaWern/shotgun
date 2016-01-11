@@ -5,6 +5,13 @@ class HomeController extends BaseController {
 	protected $layout = 'layouts.default';
 
 
+	public function index(){
+
+		$this->layout->title = 'Login';
+		$this->layout->content = View::make('login');
+	}
+
+
 	public function login(){
 		$this->layout->title = 'Login';
 		$this->layout->content = View::make('login');
